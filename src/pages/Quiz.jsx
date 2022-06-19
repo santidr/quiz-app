@@ -10,31 +10,26 @@ import Spinner from '../components/Spinner'
 
 const Quiz = () => {
     const navigate = useNavigate()
+    const { counter, increment } = useCounter()
 
     const [ quizList, setQuizList] = useState([])
     const [ showNextBtn, setShowNextBtn] = useState(false)
     const [ showFinishBtn, setShowFinishBtn] = useState(false)
     const [ blockedAnswers, setBlockedAnswers] = useState(false)
-    
-    const { counter, increment } = useCounter()
 
-    const answerButtons = document.querySelectorAll('button.answer')
-
-    const verifyAnswer = (e, correct_answer, answerSelected) => {
+    const handleVerifyAnswer = (e, correct_answer, answerSelected) => {
 
         if (!blockedAnswers) {
-            let answerButton = document.querySelector(`#${e.target.id}`)
-    
+
+            const answerButton = document.querySelector(`#${e.target.id}`)
             setBlockedAnswers(true)
-            // answerButtons.forEach(btn => {
-            //     btn.disabled = true
-            // })
     
-            if (correct_answer === answerSelected) {
+            if (correct_answer === answerSelected) 
                 answerButton.classList.add('is-success')
-            } else {
+            else
                 answerButton.classList.add('is-danger')
-            }
+
+            answerButton.classList.add('actived')
         }
 
         if (counter === quizList.length - 1)
@@ -47,14 +42,11 @@ const Quiz = () => {
 
         setShowNextBtn(false)
         setBlockedAnswers(false)
+        const answerButton = document.querySelector('div.button.actived')
         
         if (counter < quizList.length - 1) {
             increment()
-            answerButtons.forEach(btn => {
-                btn.classList.remove('is-success')
-                btn.classList.remove('is-danger')
-                btn.disabled = false
-            })
+            answerButton.classList.remove('is-success', 'is-danger', 'actived')
         }
     }
 
@@ -62,13 +54,12 @@ const Quiz = () => {
         fetchData(getQuizList())
             .then(data => setQuizList(data))
             .catch(error => console.log(error))
-
     }, [])
 
     return (
         <CardGrid>
-            {quizList.length === 0 && <Spinner />}
-            {quizList.length > 0 && (
+            { quizList.length === 0 && <Spinner />}
+            { quizList.length > 0 && (
                 <>
                     <div className="is-flex is-justify-content-flex-end mb-5">
                         <h3 className="title is-4">{counter + 1}/{quizList.length}</h3>
@@ -78,14 +69,14 @@ const Quiz = () => {
 
                         <div className="quiz-list is-flex is-flex-direction-column">
                             {quizList[counter].answers.map((answer, index) => (
-                                <button
+                                <div
                                     id={`answer${index}`}
                                     key={index}
                                     className="button answer mb-4"
-                                    onClick={(e) => verifyAnswer(e, quizList[counter].correct_answer, answer)}
+                                    onClick={(e) => handleVerifyAnswer(e, quizList[counter].correct_answer, answer)}
                                 >
                                     {answer}
-                                </button>
+                                </div>
                             ))}
                         </div>
 

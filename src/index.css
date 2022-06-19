@@ -38,8 +38,3 @@ body {
     transform: rotate(360deg);
   }
 }
-
-/* Button opacity */
-button.answer[disabled] {
-  opacity: 9;
-}
