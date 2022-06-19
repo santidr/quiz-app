@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&family=Roboto:wght@300;400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(
+    90deg,
+    #FF48B6, #FF7E6C
+  );
+}
+
+.columns,
+.card-container {
+  height: 100vh !important;
+}
+
+/* Spinner */
+.spinner {
+  border: 4px solid rgba(0,0,0,.1);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border-left-color: #FF7E6C;
+  
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Button opacity */
+button.answer[disabled] {
+  opacity: 9;
+}
