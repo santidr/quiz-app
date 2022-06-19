@@ -10,7 +10,7 @@ const CardGrid = ({ children }) => {
                 is-6-desktop is-offset-3-desktop is-flex 
                 is-justify-content-center is-flex-direction-column"
             >
-                <div className="card">
+                <div className="card mx-2">
                     <div className="card-content">
                         {children}
                     </div>

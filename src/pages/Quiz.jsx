@@ -65,8 +65,6 @@ const Quiz = () => {
 
     }, [])
 
-    console.log(document.querySelectorAll('button.answer'))
-
     return (
         <CardGrid>
             {quizList.length === 0 && <Spinner />}
