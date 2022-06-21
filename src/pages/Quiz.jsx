@@ -83,7 +83,7 @@ const Quiz = () => {
                         <div className="card-footer is-flex is-justify-content-center pt-3">
                             {showNextBtn && (
                                 <button
-                                    className="button is-primary is-rounded"
+                                    className="button is-link is-rounded"
                                     onClick={ handleNext }
                                 >
                                     Next Question
