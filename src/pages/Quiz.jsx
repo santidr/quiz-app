@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import { getQuizList } from '../api/api'
 import { fetchData } from '../helpers/fetchData'
@@ -7,15 +7,17 @@ import useCounter from '../hooks/useCounter'
 
 import CardGrid from '../components/CardGrid'
 import Spinner from '../components/Spinner'
+import { Score } from '../context/ScoreContext'
 
 const Quiz = () => {
-    const navigate = useNavigate()
     const { counter, increment } = useCounter()
 
     const [ quizList, setQuizList] = useState([])
     const [ showNextBtn, setShowNextBtn] = useState(false)
     const [ showFinishBtn, setShowFinishBtn] = useState(false)
     const [ blockedAnswers, setBlockedAnswers] = useState(false)
+
+    const { totalQuiz, setTotalQuiz, score, setScore } = useContext(Score)
 
     const handleVerifyAnswer = (e, correct_answer, answerSelected) => {
 
@@ -24,9 +26,10 @@ const Quiz = () => {
             const answerButton = document.querySelector(`#${e.target.id}`)
             setBlockedAnswers(true)
     
-            if (correct_answer === answerSelected) 
+            if (correct_answer === answerSelected) {
                 answerButton.classList.add('is-success')
-            else
+                setScore(s => s + 1)
+            } else
                 answerButton.classList.add('is-danger')
 
             answerButton.classList.add('actived')
@@ -51,8 +54,13 @@ const Quiz = () => {
     }
 
     useEffect(() => {
+        setScore(0)
+
         fetchData(getQuizList())
-            .then(data => setQuizList(data))
+            .then(data => { 
+                setQuizList(data)
+                setTotalQuiz(data.length)
+            })
             .catch(error => console.log(error))
     }, [])
 
@@ -62,7 +70,7 @@ const Quiz = () => {
             { quizList.length > 0 && (
                 <>
                     <div className="is-flex is-justify-content-flex-end mb-5">
-                        <h3 className="title is-4">{counter + 1}/{quizList.length}</h3>
+                        <h3 className="title is-4">{ counter + 1 }/{ quizList.length}</h3>
                     </div>
                     <h2 className="subtitle has-text-centered">{quizList[counter].question}</h2>
                     <div className="content">
@@ -91,12 +99,12 @@ const Quiz = () => {
                             )}
 
                             { showFinishBtn && (
-                                <button
+                                <Link
                                     className="button is-link is-rounded"
-                                    onClick={ () => navigate("/") }
+                                    to="/finished"
                                 >
                                     Finish
-                                </button>
+                                </Link>
                             )}
                         </div>
                     </div>

@@ -8,7 +8,7 @@ const Home = () => {
             
             <div className="card-content">
                 <h2 className="title is-2 has-text-centered">SuperQuiz</h2>
-                <h2 className="subtitle has-text-centered">General Knowledge Questions</h2>
+                <h2 className="subtitle has-text-centered ">General Knowledge Questions</h2>
             </div>
 
             <div className="card-content is-flex is-justify-content-center">
@@ -16,7 +16,7 @@ const Home = () => {
                     to="/quiz"
                     className="button is-link is-medium is-rounded"
                 >
-                    Start Quiz
+                    Play Quiz!
                 </Link>
             </div>
         </CardGrid>
