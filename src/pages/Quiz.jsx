@@ -69,8 +69,9 @@ const Quiz = () => {
             { quizList.length === 0 && <Spinner />}
             { quizList.length > 0 && (
                 <>
-                    <div className="is-flex is-justify-content-flex-end mb-5">
-                        <h3 className="title is-4">{ counter + 1 }/{ quizList.length}</h3>
+                    <div className="is-flex is-justify-content-space-between is-align-content-center mb-5">
+                        <progress class="progress is-primary my-auto" value={ counter + 1 } max="12" />
+                        <p className="is-size-5 has-text-weight-bold">{ counter + 1 }/{ quizList.length}</p>
                     </div>
                     <h2 className="subtitle has-text-centered">{quizList[counter].question}</h2>
                     <div className="content">

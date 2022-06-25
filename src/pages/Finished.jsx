@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import CardGrid from '../components/CardGrid'
 import { Score } from '../context/ScoreContext'
